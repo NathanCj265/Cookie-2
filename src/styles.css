@@ -18,10 +18,12 @@ body {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 5vw; /* Make font size responsive to screen width */
     color: #ff4500;
     margin-bottom: 20px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word; /* Ensure title breaks to fit if it's too long */
+    white-space: normal; /* Allow title to wrap into multiple lines if necessary */
 }
 
 h2 {
@@ -29,7 +31,6 @@ h2 {
     margin: 10px 0;
 }
 
-/* Points Display */
 #points {
     font-size: 36px;
     font-weight: bold;
@@ -37,7 +38,6 @@ h2 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Cookie styling */
 #cookie {
     width: 200px;
     cursor: pointer;
@@ -50,7 +50,6 @@ h2 {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Upgrade buttons */
 .button {
     background-color: #ffcc00;
     color: #333;
@@ -69,7 +68,14 @@ h2 {
     transform: scale(1.05);
 }
 
-/* Additional stats section */
+/* Flex layout for sections */
+.auto-clicker-section, .upgrade-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
 h3 {
     font-size: 28px;
     margin-top: 30px;
@@ -79,16 +85,4 @@ h3 {
 h4 {
     font-size: 24px;
     margin: 5px 0;
-}
-
-/* Flex layout for upgrades and stats */
-.upgrade-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.upgrade-section .button {
-    width: 200px;
 }
