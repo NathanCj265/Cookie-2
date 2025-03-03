@@ -6,34 +6,37 @@
     <title>Cookie Clicker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<>
     <h1>🍪 Cookie Clicker 🍪</h1>
+    <div class="profile-section">
+        <h2>Profile</h2>
+        <img src="images/profile.png" alt="Profile">
+        <h3>Username: <span id="username">User</span></h3>
+    </div>
+    <div class="profile-stats">
+    </div>
     <h2>Points: <span id="points">0</span></h2>
-    <img id="cookie" src="images/main-cookie.png" alt="Cookie">
-    <h3>Auto-Clickers</h3>
-    <div class="auto-clicker-section">
-        <button class="button" onclick="buyAutoClicker(0)">Buy AutoClicker (10 pts)</button>
-        <button class="button" onclick="buyAutoClicker(1)">Buy AutoClicker (50 pts)</button>
-        <button class="button" onclick="buyAutoClicker(2)">Buy AutoClicker (100 pts)</button>
-        <button class="button" onclick="buyAutoClicker(3)">Buy AutoClicker (200 pts)</button>
-        <button class="button" onclick="buyAutoClicker(4)">Buy AutoClicker (500 pts)</button>
-        <button class="button" onclick="buyAutoClicker(5)">Buy AutoClicker (1000 pts)</button>
-        <button class="button" onclick="buyAutoClicker(6)">Buy AutoClicker (2000 pts)</button>
-        <button class="button" onclick="buyAutoClicker(7)">Buy AutoClicker (5000 pts)</button>
-    </div>
 
-    <h3>Upgrades</h3>
-    <div class="upgrade-section">
-        <button class="button" onclick="buyUpgrade(0)">Upgrade Click Power (50 pts)</button>
-        <button class="button" onclick="buyUpgrade(1)">Upgrade Click Power (200 pts)</button>
-        <button class="button" onclick="buyUpgrade(2)">Upgrade Click Power (500 pts)</button>
-        <button class="button" onclick="buyUpgrade(3)">Upgrade Click Power (1000 pts)</button>
-        <button class="button" onclick="buyUpgrade(4)">Upgrade Click Power (2500 pts)</button>
+    <img id="cookie" src="images/main-cookie.png" alt="Cookie">
+    <div class="auto-clicker-section">
+        <h3>Auto Clickers</h3>
+        <button class="button" onclick="buyAutoClicker(1)">Buy Cookie Clicker (10 pts)</button>
+        <button class="button" onclick="buyAutoClicker(2)">Buy Double Clicker (50 pts)</button>
+        <button class="button" onclick="buyAutoClicker(3)">Buy Triple Clicker (200 pts)</button>
+        <h4>AutoClickers: <span id="autoclickers">0</span></h4>
     </div>
-    <h4>AutoClickers: <span id="autoclickers">0</span></h4>
-    <h4>Click Power: <span id="clickPower">1</span></h4>
+  
+    <div class="upgrade-section">
+        <h3>Upgrades</h3>
+        <button class="button" onclick="buyUpgrade(1)">Upgrade Click Power (50 pts)</button>
+        <button class="button" onclick="buyUpgrade(2)">Upgrade Auto-Clicker Speed (100 pts)</button>
+        <button class="button" onclick="buyUpgrade(3)">Upgrade Point Multiplier (200 pts)</button>
+        <h4>Click Power: <span id="clickPower">1</span></h4>
+    </div>   
     <script src="script.js"></script>
+
 </body>
 </html>
+
 
 
