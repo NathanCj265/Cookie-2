@@ -1,30 +1,32 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8e8c1;
-    height: 100vh;
+    background: linear-gradient(180deg, #ffcc99, #ff9966);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #3c3c3c;
+    height: 100vh;
+    color: #333;
 }
 
+/* Title Styling */
 h1 {
-    font-size: 10vw;
+    font-size: 48px;
     color: #ff4500;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word;
-    white-space: normal;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Points Display */
 h2 {
     font-size: 32px;
     margin: 10px 0;
@@ -34,61 +36,86 @@ h2 {
     font-size: 36px;
     font-weight: bold;
     color: #4caf50;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Cookie Styling */
 #cookie {
     width: 200px;
+    height: auto;
     cursor: pointer;
     transition: transform 0.1s ease-in-out, box-shadow 0.2s ease;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 #cookie:active {
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.button {
-    background-color: #ffcc00;
-    color: #333;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 15px 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-.button:hover {
-    background-color: #ffaa00;
-    transform: scale(1.05);
-}
-
-
-.auto-clicker-section, .upgrade-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Upgrade & AutoClicker Section */
+.upgrade-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
+    width: 90%;
+    max-width: 500px;
 }
 
 h3 {
-    font-size: 28px;
-    margin-top: 30px;
+    font-size: 26px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* Upgrade & AutoClicker Buttons */
+.button {
+    background: #ffcc00;
     color: #333;
+    border: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.1s;
+}
+
+.button:hover {
+    background: #ffaa00;
+    transform: scale(1.05);
 }
 
 h4 {
-    font-size: 24px;
+    font-size: 20px;
     margin: 5px 0;
+    color: #555;
 }
 
-.profile-section{
-    align-items: left;
-    margin-top: 20px;
-}
+/* Responsive Design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 36px;
+    }
 
+    h2 {
+        font-size: 28px;
+    }
+
+    #cookie {
+        width: 150px;
+    }
+
+    .button {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+
+    .upgrade-section {
+        width: 95%;
+    }
+}
 

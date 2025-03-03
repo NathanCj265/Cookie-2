@@ -6,34 +6,39 @@
     <title>Cookie Clicker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<>
-    <h1>🍪 Cookie Clicker 🍪</h1>
+<body>
 
-    <div class="profile-section">
-        <ul> 
-            <li>Username: <span id="username">Guest</span></li>
-            <li>Level: <span id="level">1</span></li>
-            <li>Rank: <span id="rank">Beginner</span></li>
-        </ul>
-    </div>
+    <h1>🍪 Cookie Clicker 🍪</h1>
     <h2>Points: <span id="points">0</span></h2>
+
     <img id="cookie" src="images/main-cookie.png" alt="Cookie">
-    <div class="auto-clicker-section">
+
+    <div class="upgrade-section">
         <h3>Auto Clickers</h3>
-        <button class="button" onclick="buyAutoClicker(1)">Buy Cookie Clicker (10 pts)</button>
-        <button class="button" onclick="buyAutoClicker(2)">Buy Double Clicker (50 pts)</button>
-        <button class="button" onclick="buyAutoClicker(3)">Buy Triple Clicker (200 pts)</button>
-        <h4>AutoClickers: <span id="autoclickers">0</span></h4>
+        <button class="button" onclick="game.buyAutoClicker(0)">Buy Grandma</button>
+        <h4 id="autoclickers-1">Grandma: 0 (Cost: 20 pts)</h4>
+        
+        <button class="button" onclick="game.buyAutoClicker(1)">Buy Bakery</button>
+        <h4 id="autoclickers-2">Bakery: 0 (Cost: 100 pts)</h4>
+
+        <button class="button" onclick="game.buyAutoClicker(2)">Buy Factory</button>
+        <h4 id="autoclickers-3">Factory: 0 (Cost: 500 pts)</h4>
     </div>
-  
+
     <div class="upgrade-section">
         <h3>Upgrades</h3>
-        <button class="button" onclick="buyUpgrade(1)">Upgrade Click Power (50 pts)</button>
-        <button class="button" onclick="buyUpgrade(2)">Upgrade Auto-Clicker Speed (100 pts)</button>
-        <button class="button" onclick="buyUpgrade(3)">Upgrade Point Multiplier (200 pts)</button>
-        <h4>Click Power: <span id="clickPower">1</span></h4>
-    </div>   
+        <button class="button" onclick="game.buyUpgrade(0)">Golden Fingers</button>
+        <h4 id="upgrade-1">Golden Fingers: +1 Click Power (Cost: 50 pts)</h4>
+
+        <button class="button" onclick="game.buyUpgrade(1)">Iron Cookie</button>
+        <h4 id="upgrade-2">Iron Cookie: +5 Click Power (Cost: 250 pts)</h4>
+
+        <button class="button" onclick="game.buyUpgrade(2)">Cookie God</button>
+        <h4 id="upgrade-3">Cookie God: +10 Click Power (Cost: 1000 pts)</h4>
+    </div>
+
     <script src="script.js"></script>
+
 </body>
 </html>
 

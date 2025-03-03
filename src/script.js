@@ -1,67 +1,106 @@
-let points = parseInt(localStorage.getItem("points")) || 0;
-let autoClickers = parseInt(localStorage.getItem("autoClickers")) || 0;
-let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
-let autoClickerSpeed = [0, 1, 2, 3]; 
-let clickerNames = ["Cookie Clicker", "Double Clicker", "Triple Clicker"]; 
-let upgradeNames = ["Click Power", "Auto-Clicker Speed", "Point Multiplier"]; 
-let upgradePrices = [50, 200, 500]; 
-let autoClickerPrices = [10, 50, 200]; 
+// Game Class
+class CookieClicker {
+    constructor() {
+        this.points = parseInt(localStorage.getItem("points")) || 0;
+        this.clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
 
-document.getElementById("points").innerText = points;
-document.getElementById("autoclickers").innerText = autoClickers;
-document.getElementById("clickPower").innerText = clickPower;
+        this.autoClickers = [
+            { name: "Grandma", cost: 20, amount: 0, power: 1 },
+            { name: "Bakery", cost: 100, amount: 0, power: 5 },
+            { name: "Factory", cost: 500, amount: 0, power: 10 }
+        ];
 
+        this.upgrades = [
+            { name: "Golden Fingers", cost: 50, power: 1 },
+            { name: "Iron Cookie", cost: 250, power: 5 },
+            { name: "Cookie God", cost: 1000, power: 10 }
+        ];
 
-function saveGame() {
-    localStorage.setItem("points", points);
-    localStorage.setItem("autoClickers", autoClickers);
-    localStorage.setItem("clickPower", clickPower);
-    localStorage.setItem("autoClickerSpeed", JSON.stringify(autoClickerSpeed));
-}
-
-
-function clickCookie() {
-    points += clickPower;
-    document.getElementById("points").innerText = points;
-    saveGame();
-}
-
-
-function buyAutoClicker(level) {
-    if (points >= autoClickerPrices[level - 1]) {
-        points -= autoClickerPrices[level - 1];
-        autoClickers++;
-        autoClickerSpeed[level]++;  
-        document.getElementById("points").innerText = points;
-        document.getElementById("autoclickers").innerText = autoClickers;
-        alert(`You bought a ${clickerNames[level - 1]}!`);
-        saveGame();
+        this.loadGame();
+        this.updateUI();
+        this.startAutoClicker();
     }
-}
 
+    // Save Game Data
+    saveGame() {
+        localStorage.setItem("points", this.points);
+        localStorage.setItem("clickPower", this.clickPower);
+        localStorage.setItem("autoClickers", JSON.stringify(this.autoClickers));
+    }
 
-function buyUpgrade(level) {
-    if (points >= upgradePrices[level - 1]) {
-        points -= upgradePrices[level - 1];
-        if (level === 1) {
-            clickPower++; 
-        } else if (level === 2) {
-            autoClickerSpeed[level - 1]++; 
-        } else if (level === 3) {
-            clickPower += 2; 
+    // Load Game Data
+    loadGame() {
+        const storedClickers = JSON.parse(localStorage.getItem("autoClickers"));
+        if (storedClickers) this.autoClickers = storedClickers;
+    }
+
+    // Clicking the Cookie
+    clickCookie() {
+        this.points += this.clickPower;
+        this.updateUI();
+        this.saveGame();
+    }
+
+    // Buying AutoClickers
+    buyAutoClicker(index) {
+        const autoClicker = this.autoClickers[index];
+
+        if (this.points >= autoClicker.cost) {
+            this.points -= autoClicker.cost;
+            autoClicker.amount++;
+            autoClicker.cost = Math.floor(autoClicker.cost * 1.2); // Cost Increases
+
+            this.updateUI();
+            this.saveGame();
+        } else {
+            alert("Not enough points!");
         }
-        document.getElementById("points").innerText = points;
-        document.getElementById("clickPower").innerText = clickPower;
-        alert(`You upgraded ${upgradeNames[level - 1]}!`);
-        saveGame();
+    }
+
+    // Buying Upgrades
+    buyUpgrade(index) {
+        const upgrade = this.upgrades[index];
+
+        if (this.points >= upgrade.cost) {
+            this.points -= upgrade.cost;
+            this.clickPower += upgrade.power;
+            upgrade.cost = Math.floor(upgrade.cost * 1.5); // Cost Increases
+
+            this.updateUI();
+            this.saveGame();
+        } else {
+            alert("Not enough points!");
+        }
+    }
+
+    // Auto-Clicker Logic
+    startAutoClicker() {
+        setInterval(() => {
+            let totalAutoClickPower = this.autoClickers.reduce((sum, clicker) => sum + clicker.amount * clicker.power, 0);
+            this.points += totalAutoClickPower;
+            this.updateUI();
+            this.saveGame();
+        }, 1000);
+    }
+
+    // Update UI Elements
+    updateUI() {
+        document.getElementById("points").innerText = this.points;
+
+        this.autoClickers.forEach((clicker, index) => {
+            document.getElementById(`autoclickers-${index + 1}`).innerText =
+                `${clicker.name}: ${clicker.amount} (Cost: ${clicker.cost} pts)`;
+        });
+
+        this.upgrades.forEach((upgrade, index) => {
+            document.getElementById(`upgrade-${index + 1}`).innerText =
+                `${upgrade.name}: +${upgrade.power} Click Power (Cost: ${upgrade.cost} pts)`;
+        });
     }
 }
 
+// Initialize Game
+const game = new CookieClicker();
 
-setInterval(() => {
-    points += autoClickers * clickerNames.length;  
-    document.getElementById("points").innerText = points;
-    saveGame();
-}, 1000);
-
-document.getElementById("cookie").addEventListener("click", clickCookie);
+// Event Listeners
+document.getElementById("cookie").addEventListener("click", () => game.clickCookie());
