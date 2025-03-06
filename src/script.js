@@ -44,9 +44,11 @@ class CookieClickerGame {
 class AutoClickers {
     constructor() {
         this.autoClickers = {
+            cursor: 0,
             grandma: 0,
             bakery: 0,
-            factory: 0
+            factory: 0,
+            mine: 0
         };
     }
 
@@ -67,6 +69,10 @@ class AutoClickers {
     calculateCost(type) {
         let cost = 0;
         switch (type) {
+
+            case "cursor":
+                cost = 10 + this.autoClickers.cursor * 5;
+                break;
             case "grandma":
                 cost = 20 + this.autoClickers.grandma * 10;
                 break;
@@ -76,6 +82,9 @@ class AutoClickers {
             case "factory":
                 cost = 500 + this.autoClickers.factory * 100;
                 break;
+            case "mine":
+                cost = 2000 + this.autoClickers.mine * 500;
+                break; 
         }
         return cost;
     }
@@ -88,10 +97,13 @@ class AutoClickers {
     }
 
     updateUI() {
-        document.getElementById("autoclickers-1").innerText = `Grandma: ${this.autoClickers.grandma} (Cost: ${20 + this.autoClickers.grandma * 10} pts)`;
-        document.getElementById("autoclickers-2").innerText = `Bakery: ${this.autoClickers.bakery} (Cost: ${100 + this.autoClickers.bakery * 50} pts)`;
-        document.getElementById("autoclickers-3").innerText = `Factory: ${this.autoClickers.factory} (Cost: ${500 + this.autoClickers.factory * 100} pts)`;
+        document.getElementById("autoclickers-2").innerText = `Cursor: ${this.autoClickers.cursor} (Cost: ${10 + this.autoClickers.cursor * 5} pts)`;
+        document.getElementById("autoclickers-2").innerText = `Grandma: ${this.autoClickers.grandma} (Cost: ${20 + this.autoClickers.grandma * 10} pts)`;
+        document.getElementById("autoclickers-3").innerText = `Bakery: ${this.autoClickers.bakery} (Cost: ${100 + this.autoClickers.bakery * 50} pts)`;
+        document.getElementById("autoclickers-4").innerText = `Factory: ${this.autoClickers.factory} (Cost: ${500 + this.autoClickers.factory * 100} pts)`;
+        document.getElementById("autoclickers-2").innerText = `Grandma: ${this.autoClickers.mine} (Cost: ${2000 + this.autoClickers.mine * 500} pts)`;
     }
+
 }
 
 
