@@ -137,6 +137,8 @@ class Upgrades {
         document.getElementById("upgrade-1").innerText = `Golden Fingers: +1 Click Power (Cost: ${this.upgrades.goldenFingers.cost} pts)`;
         document.getElementById("upgrade-2").innerText = `Iron Cookie: +5 Click Power (Cost: ${this.upgrades.ironCookie.cost} pts)`;
         document.getElementById("upgrade-3").innerText = `Cookie God: +10 Click Power (Cost: ${this.upgrades.cookieGod.cost} pts)`;
+        document.getElementById("upgrade-4").innerText = `Cookie Factory: +50 Click Power (Cost: ${this.upgrades.cookieFactory.cost} pts)`;
+        document.getElementById("upgrade-5").innerText = `Cookie Empire: +100 Click Power (Cost: ${this.upgrades.cookieEmpire.cost} pts)`;
     }
 }
 
@@ -156,3 +158,5 @@ document.getElementById("buyIronCookie").addEventListener("click", () => game.up
 document.getElementById("buyCookieGod").addEventListener("click", () => game.upgrades.buyUpgrade("cookieGod", game));
 document.getElementById("buyCookieFactory").addEventListener("click", () => game.upgrades.buyUpgrade("cookieFactory", game));
 document.getElementById("buyCookieEmpire").addEventListener("click", () => game.upgrades.buyUpgrade("cookieEmpire", game));
+
+
