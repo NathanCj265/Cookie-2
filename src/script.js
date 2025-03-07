@@ -84,7 +84,7 @@ class AutoClickers {
                 break;
             case "mine":
                 cost = 2000 + this.autoClickers.mine * 500;
-                break; 
+                break;  
         }
         return cost;
     }
@@ -97,11 +97,11 @@ class AutoClickers {
     }
 
     updateUI() {
-        document.getElementById("autoclickers-2").innerText = `Cursor: ${this.autoClickers.cursor} (Cost: ${10 + this.autoClickers.cursor * 5} pts)`;
-        document.getElementById("autoclickers-2").innerText = `Grandma: ${this.autoClickers.grandma} (Cost: ${20 + this.autoClickers.grandma * 10} pts)`;
-        document.getElementById("autoclickers-3").innerText = `Bakery: ${this.autoClickers.bakery} (Cost: ${100 + this.autoClickers.bakery * 50} pts)`;
-        document.getElementById("autoclickers-4").innerText = `Factory: ${this.autoClickers.factory} (Cost: ${500 + this.autoClickers.factory * 100} pts)`;
-        document.getElementById("autoclickers-2").innerText = `Grandma: ${this.autoClickers.mine} (Cost: ${2000 + this.autoClickers.mine * 500} pts)`;
+        document.getElementById("autoclickers-0").innerText = `Cursor: ${this.autoClickers.cursor} (Cost: ${10 + this.autoClickers.cursor * 5} pts)`;
+        document.getElementById("autoclickers-1").innerText = `Grandma: ${this.autoClickers.grandma} (Cost: ${20 + this.autoClickers.grandma * 10} pts)`;
+        document.getElementById("autoclickers-2").innerText = `Bakery: ${this.autoClickers.bakery} (Cost: ${100 + this.autoClickers.bakery * 50} pts)`;
+        document.getElementById("autoclickers-3").innerText = `Factory: ${this.autoClickers.factory} (Cost: ${500 + this.autoClickers.factory * 100} pts)`;
+        document.getElementById("autoclickers-4").innerText = `Mine: ${this.autoClickers.mine} (Cost: ${2000 + this.autoClickers.mine * 500} pts)`;
     }
 
 }
@@ -112,7 +112,9 @@ class Upgrades {
         this.upgrades = {
             goldenFingers: { cost: 50, boost: 1 },
             ironCookie: { cost: 250, boost: 5 },
-            cookieGod: { cost: 1000, boost: 10 }
+            cookieGod: { cost: 1000, boost: 10 },
+            cookieFactory: { cost: 5000, boost: 50 },
+            cookieEmpire: { cost: 10000, boost: 100 }
         };
     }
 
@@ -143,12 +145,14 @@ const game = new CookieClickerGame();
 
 document.getElementById("cookie").addEventListener("click", () => game.clickCookie());
 
-
+document.getElementById("buyCursor").addEventListener("click", () => game.autoClickers.buyAutoClicker("cursor", game));
 document.getElementById("buyGrandma").addEventListener("click", () => game.autoClickers.buyAutoClicker("grandma", game));
 document.getElementById("buyBakery").addEventListener("click", () => game.autoClickers.buyAutoClicker("bakery", game));
 document.getElementById("buyFactory").addEventListener("click", () => game.autoClickers.buyAutoClicker("factory", game));
+document.getElementById("buyMine").addEventListener("click", () => game.autoClickers.buyAutoClicker("mine", game));
 
 document.getElementById("buyGoldenFingers").addEventListener("click", () => game.upgrades.buyUpgrade("goldenFingers", game));
 document.getElementById("buyIronCookie").addEventListener("click", () => game.upgrades.buyUpgrade("ironCookie", game));
 document.getElementById("buyCookieGod").addEventListener("click", () => game.upgrades.buyUpgrade("cookieGod", game));
-
+document.getElementById("buyCookieFactory").addEventListener("click", () => game.upgrades.buyUpgrade("cookieFactory", game));
+document.getElementById("buyCookieEmpire").addEventListener("click", () => game.upgrades.buyUpgrade("cookieEmpire", game));

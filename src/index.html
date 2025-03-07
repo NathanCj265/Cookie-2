@@ -6,13 +6,21 @@
     <title>Cookie Clicker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<>
     <h1>🍪 Cookie Clicker 🍪</h1>
-    <div class="timer">
-        <h2>Time: <span id="time">0</span></h2>
-        <button class="button" id="start">Start</button>
-        <button class="button" id="stop">Stop</button>
-        <button class="button" id="reset">Reset</button>
+    <div class = "profile">
+        <h2>Stats</h2>
+        <h3>Click Power: <span id="clickPower">1</span></h3>
+        <h3>Clicks: <span id="clicks">0</span></h3>
+        <h3>Clicks Per Second: <span id="clicksPerSecond">0</span></h3>
+    </div>
+
+    <div class ="display-section">  <h2>Click the cookie to get points!</h2>
+    <h2>Click Power: <span id="clickPowerDisplay">1</span></h2>
+    <h2>Clicks: <span id="clicksDisplay">0</span></h2>
+    <h2>Clicks Per Second: <span id="clicksPerSecondDisplay">0</span></h2>
+    <h2>Points: <span id="pointsDisplay">0</span></h2>
+    </div> 
 
     <h2>Points: <span id="points">0</span></h2>
     <img id="cookie" src="images/main-cookie.png" alt="Cookie">
@@ -38,10 +46,19 @@
         <h4 id="upgrade-2">Iron Cookie: +5 Click Power</h4>
         <button class="button" id="buyCookieGod">Cookie God (+10 Click Power) 1000 pts</button>
         <h4 id="upgrade-3">Cookie God: +10 Click Power</h4>
+        <button class="button" id="buyCookieFactory">Cookie Factory (+50 Click Power) 5000 pts</button>
+        <h4 id="upgrade-4">Cookie Factory: +50 Click Power</h4>
+        <button class="button" id="buyCookieEmpire">Cookie Empire (+100 Click Power) 10000 pts</button>
+        <h4 id="upgrade-5">Cookie Empire: +100 Click Power</h4>
     </div>
 
-    <script src="script.js"></script>
-
+    <div class = "background-themes">
+        <h2>Background Themes</h2>
+        <button class="button" id="buyTheme1">Theme 1 (100 pts)</button>
+        <button class="button" id="buyTheme2">Theme 2 (200 pts)</button>
+        <button class="button" id="buyTheme3">Theme 3 (300 pts)</button>
+    
+        <script src="script.js"></script>
 </body>
 </html>
 
