@@ -1,10 +1,8 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 
 body {
     font-family: 'Arial', sans-serif;
@@ -17,14 +15,12 @@ body {
     color: #333;
 }
 
-
 h1 {
     font-size: 48px;
     color: #ff4500;
     margin-bottom: 20px;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
-
 
 h2 {
     font-size: 32px;
@@ -38,7 +34,6 @@ h2 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
 #cookie {
     width: 200px;
     height: auto;
@@ -51,7 +46,6 @@ h2 {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
-
 
 .upgrade-section {
     background-color: rgba(255, 255, 255, 0.9);
@@ -69,7 +63,6 @@ h3 {
     color: #444;
     margin-bottom: 10px;
 }
-
 
 .button {
     background: #ffcc00;
@@ -95,7 +88,6 @@ h4 {
     color: #555;
 }
 
-
 @media (max-width: 600px) {
     h1 {
         font-size: 36px;
@@ -119,9 +111,9 @@ h4 {
     }
 }
 
-    .profile{
-        font-size: 20px;
-        color: black;
-        margin-top: 20px;
-        align-items: left;
-    }
+.profile {
+    font-size: 20px;
+    color: black;
+    margin-top: 20px;
+    align-items: left;
+}
