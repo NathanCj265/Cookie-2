@@ -1,119 +1,160 @@
+/* General reset for margins and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body and Game Container */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(180deg, #ffcc99, #ff9966);
+    font-family: 'Roboto', sans-serif;
+    background: #f8f4e3;
+    color: #333;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    align-items: center;
     height: 100vh;
-    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+header, footer {
+    width: 100%;
+    background: #ff6347;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+.game-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
 }
 
 h1 {
     font-size: 48px;
-    color: #ff4500;
-    margin-bottom: 20px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    color: #ff6347;
 }
 
-h2 {
+/* Game Stats */
+.game-stats {
+    margin-bottom: 40px;
+}
+
+.game-stats h2 {
     font-size: 32px;
+    color: #333;
+}
+
+.game-stats p {
+    font-size: 24px;
     margin: 10px 0;
 }
 
-#points {
-    font-size: 36px;
-    font-weight: bold;
-    color: #4caf50;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+/* Cookie Clicker Section */
+.game-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+}
+
+.cookie-click {
+    flex: 1;
+    min-width: 300px;
 }
 
 #cookie {
-    width: 200px;
-    height: auto;
+    width: 100%;
+    max-width: 300px;
     cursor: pointer;
-    transition: transform 0.1s ease-in-out, box-shadow 0.2s ease;
-    margin-top: 20px;
+    transition: transform 0.1s ease-in-out;
 }
 
 #cookie:active {
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    animation: clickEffect 0.2s;
 }
 
-.upgrade-section {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-    width: 80%;
-    max-width: 500px;
-    align-items: right;
+@keyframes clickEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-h3 {
-    font-size: 26px;
-    color: #444;
-    margin-bottom: 10px;
+
+.auto-clickers, .upgrades, .themes {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
 }
 
-.button {
+button {
     background: #ffcc00;
     color: #333;
-    border: none;
-    padding: 15px 20px;
+    padding: 20px;
     font-size: 18px;
     border-radius: 8px;
+    margin: 10px 0;
     cursor: pointer;
-    margin: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s, transform 0.1s;
+    transition: background 0.3s ease, transform 0.1s ease;
+    width: 100%;
 }
 
-.button:hover {
+button:hover {
     background: #ffaa00;
     transform: scale(1.05);
 }
 
-h4 {
-    font-size: 20px;
-    margin: 5px 0;
-    color: #555;
+button:disabled {
+    background: #dcdcdc;
+    cursor: not-allowed;
 }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 36px;
+.reset-button, .save-button {
+    background: #ff6347;
+    color: #fff;
+    margin-top: 30px;
+}
+
+.reset-button:hover, .save-button:hover {
+    background: #e5533d;
+}
+
+h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-actions {
+        flex-direction: column;
+        align-items: center;
     }
 
-    h2 {
-        font-size: 28px;
+    .cookie-click, .auto-clickers, .upgrades, .themes {
+        width: 100%;
     }
 
-    #cookie {
-        width: 150px;
-    }
-
-    .button {
+    button {
+        padding: 15px;
         font-size: 16px;
-        padding: 12px 18px;
     }
-
-    .upgrade-section {
-        width: 95%;
-    }
-}
-
-.profile {
-    font-size: 20px;
-    color: black;
-    margin-top: 20px;
-    align-items: left;
 }

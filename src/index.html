@@ -5,70 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍪 Cookie Clicker 🍪</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>🍪 Cookie Clicker 🍪</h1>
+    <header>
+        <h1>🍪 Cookie Clicker 🍪</h1>
+    </header>
+    <main class="game-container">
+        <div class="game-stats">
+            <h2>Game Stats</h2>
+            <p>Points: <span id="pointsDisplay">0</span></p>
+            <p>Click Power: <span id="clickPower">1</span></p>
+            <p>Clicks: <span id="clicks">0</span></p>
+            <p>Clicks Per Second: <span id="clicksPerSecond">0</span></p>
+        </div>
 
-  
-    <div class="profile">
-        <h2>Stats</h2>
-        <h3>Click Power: <span id="clickPower">1</span></h3>
-        <h3>Clicks: <span id="clicks">0</span></h3>
-        <h3>Clicks Per Second: <span id="clicksPerSecond">0</span></h3>
-    </div>
+        <div class="game-actions">
+            <div class="cookie-click">
+                <p>Click the cookie to earn points!</p>
+                <img id="cookie" src="images/main-cookie.png" alt="Cookie">
+            </div>
 
-    
-    <div class="display-section">
-        <h2>Click the cookie to get points!</h2>
-        <h2>Click Power: <span id="clickPowerDisplay">1</span></h2>
-        <h2>Clicks: <span id="clicksDisplay">0</span></h2>
-        <h2>Clicks Per Second: <span id="clicksPerSecondDisplay">0</span></h2>
-        <h2>Points: <span id="pointsDisplay">0</span></h2>
-    </div> 
+            <div class="auto-clickers">
+                <h3>Buy Auto-Clickers</h3>
+                <button id="buyCursor">Cursor (10 pts)</button>
+                <button id="buyGrandma">Grandma (20 pts)</button>
+                <button id="buyBakery">Bakery (100 pts)</button>
+                <button id="buyFactory">Factory (500 pts)</button>
+                <button id="buyMine">Mine (2000 pts)</button>
+                <button id="buySpaceship">Spaceship (5000 pts)</button> <!-- New auto-clicker -->
+                <button id="buyRobot">Robot (10000 pts)</button> <!-- New auto-clicker -->
+                <button id="buyAlien">Alien (20000 pts)</button> <!-- New auto-clicker -->
+                <p id="autoclickers-0">Cursor: 0</p>
+                <p id="autoclickers-1">Grandma: 0</p>
+                <p id="autoclickers-2">Bakery: 0</p>
+                <p id="autoclickers-3">Factory: 0</p>
+                <p id="autoclickers-4">Mine: 0</p>
+                <p id="autoclickers-5">Spaceship: 0</p> <!-- New auto-clicker -->
+                <p id="autoclickers-6">Robot: 0</p> <!-- New auto-clicker -->
+                <p id="autoclickers-7">Alien: 0</p> <!-- New auto-clicker -->
+            </div>
 
-    <h2>Points: <span id="points">0</span></h2>
+            <div class="upgrades">
+                <h3>Buy Upgrades</h3>
+                <button id="buyGoldenFingers">Golden Fingers (+1 Click Power) 50 pts</button>
+                <button id="buyIronCookie">Iron Cookie (+5 Click Power) 250 pts</button>
+                <button id="buyCookieGod">Cookie God (+10 Click Power) 1000 pts</button>
+                <button id="buyCookieFactory">Cookie Factory (+50 Click Power) 5000 pts</button>
+                <button id="buyCookieEmpire">Cookie Empire (+100 Click Power) 10000 pts</button>
+            </div>
 
-    
-    <img id="cookie" src="images/main-cookie.png" alt="Cookie">
+            <div class="themes">
+                <h3>Buy Themes</h3>
+                <button id="buyDark">Dark Theme (1000 pts)</button>
+                <button id="buyLight">Light Theme (2000 pts)</button>
+                <button id="buyCookie">Cookie Theme (3000 pts)</button>
+                <button id="buyCandy">Candy Theme (4000 pts)</button>
+            </div>
+        </div>
 
-   
-    <div class="upgrade-section">
-        <h3>Auto Clickers</h3>
-        <button class="button" id="buyCursor">Buy Cursor (10 pts)</button>
-        <h4 id="autoclickers-0">Cursor: 0</h4>
-        <button class="button" id="buyGrandma">Buy Grandma (20 pts)</button>
-        <h4 id="autoclickers-1">Grandma: 0</h4>
-        <button class="button" id="buyBakery">Buy Bakery (100 pts)</button>
-        <h4 id="autoclickers-2">Bakery: 0</h4>
-        <button class="button" id="buyFactory">Buy Factory (500 pts)</button>
-        <h4 id="autoclickers-3">Factory: 0</h4>
-        <button class="button" id="buyMine">Buy Mine (2000 pts)</button>
-        <h4 id="autoclickers-4">Mine: 0</h4>
-    </div>
-
-   
-    <div class="upgrade-section">
-        <h3>Upgrades</h3>
-        <button class="button" id="buyGoldenFingers">Golden Fingers (+1 Click Power) 50 pts</button>
-        <h4 id="upgrade-1">Golden Fingers: +1 Click Power</h4>
-        <button class="button" id="buyIronCookie">Iron Cookie (+5 Click Power) 250 pts</button>
-        <h4 id="upgrade-2">Iron Cookie: +5 Click Power</h4>
-        <button class="button" id="buyCookieGod">Cookie God (+10 Click Power) 1000 pts</button>
-        <h4 id="upgrade-3">Cookie God: +10 Click Power</h4>
-        <button class="button" id="buyCookieFactory">Cookie Factory (+50 Click Power) 5000 pts</button>
-        <h4 id="upgrade-4">Cookie Factory: +50 Click Power</h4>
-        <button class="button" id="buyCookieEmpire">Cookie Empire (+100 Click Power) 10000 pts</button>
-        <h4 id="upgrade-5">Cookie Empire: +100 Click Power</h4>
-    </div>
-
-  
-    <div class="background-themes">
-        <h2>Background Themes</h2>
-        <button class="button" id="buyTheme1">Theme 1 (100 pts)</button>
-        <button class="button" id="buyTheme2">Theme 2 (200 pts)</button>
-        <button class="button" id="buyTheme3">Theme 3 (300 pts)</button>
-    </div>
-
+        <button id="resetGame" class="reset-button">Reset Game</button>
+        <button id="saveGame" class="save-button">Save Game</button>
+    </main>
+    <footer>
+        <p>&copy; Cookie clicker </p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
