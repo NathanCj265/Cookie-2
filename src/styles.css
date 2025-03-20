@@ -1,11 +1,9 @@
-/* General reset for margins and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body and Game Container */
 body {
     font-family: 'Roboto', sans-serif;
     background: #f8f4e3;
@@ -47,10 +45,9 @@ header h1, footer p {
 h1 {
     font-size: 48px;
     margin-bottom: 30px;
-    color: #ff6347;
+    color: black;
 }
 
-/* Game Stats */
 .game-stats {
     margin-bottom: 40px;
 }
@@ -65,7 +62,7 @@ h1 {
     margin: 10px 0;
 }
 
-/* Cookie Clicker Section */
+/* Cookie section */
 .game-actions {
     display: flex;
     justify-content: space-between;
@@ -142,7 +139,6 @@ h3 {
     margin-bottom: 20px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .game-actions {
         flex-direction: column;
