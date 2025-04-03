@@ -40,8 +40,7 @@ class AutoClickerButton extends Button {
         if (this.game.points >= this.cost) {
             this.game.points -= this.cost;
             this.game.autoClickers[this.autoClickerType]++;
-            this.game.updateUI();
-            this.game.saveGame();
+            this.game.updateUI(); // Update the UI only
         } else {
             alert("Not enough points!");
         }
@@ -60,8 +59,7 @@ class UpgradeButton extends Button {
         if (this.game.points >= this.cost) {
             this.game.points -= this.cost;
             this.game.clickPower += this.game.upgrades[this.upgradeType].boost;
-            this.game.updateUI();
-            this.game.saveGame();
+            this.game.updateUI(); // Update the UI only
         } else {
             alert("Not enough points!");
         }
@@ -82,13 +80,11 @@ class ThemesButton extends Button {
         if (theme.purchased) {
             this.applyTheme(this.themeType);
         } else if (this.game.points >= this.cost) {
-            this.game.points -= this.cost; 
-            theme.purchased = true; 
-            this.applyTheme(this.themeType); 
-            this.game.updateUI();
-            this.game.saveGame(); 
+            this.game.points -= this.cost;
+            theme.purchased = true;
+            this.applyTheme(this.themeType);
+            this.game.updateUI(); // Update the UI only
         } else {
-            
             alert("You don't have enough points to buy this theme!");
         }
     }
@@ -96,7 +92,7 @@ class ThemesButton extends Button {
     applyTheme(themeType) {
         const theme = this.game.themes[themeType];
         if (theme) {
-            document.body.style.background = theme.backgroundColor; 
+            document.body.style.background = theme.backgroundColor;
             document.body.className = theme.color;
             localStorage.setItem("currentTheme", themeType);
         } else {
@@ -104,6 +100,7 @@ class ThemesButton extends Button {
         }
     }
 }
+
 class CookieClickerGame {
     constructor() {
         this.points = 0;

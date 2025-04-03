@@ -213,33 +213,30 @@ h3 {
     }
 }
 
-/* Dark Theme */
+
 body.darkTheme {
-    background-color: #333333; /* Dark gray background */
-    color: white; /* White text color */
+    background-color: #333333; 
+    color: white; 
 }
 
 
-
-/* Cookie Theme */
 body.cookieTheme {
-    background-color: #f5deb3; /* Cookie-like beige background */
-    color: #333; /* Dark gray text color */
+    background-color: #f5deb3; 
+    color: #333; 
 }
 
-/* Candy Theme */
+
 body.candyTheme {
-    background-color: #ffcccb; /* Light pink candy background */
-    color: #333; /* Dark gray text color */
+    background-color: #ffcccb; 
+    color: #333; 
 }
 
-/* Chocolate Theme */
+
 body.chocolateTheme {
-    background-color: #4b2e2e; /* Dark chocolate background */
-    color: #f5deb3; /* Light beige text color */
+    background-color: #4b2e2e; 
+    color: #f5deb3; 
 }
 
-/* Space Theme */
 body.spaceTheme {
     background: linear-gradient(135deg, #000033, #1a1a66, #333399); 
     color: #ffffff; 
@@ -247,9 +244,84 @@ body.spaceTheme {
     animation: spaceGradient 10s ease infinite; 
 }
 
-/* Space Theme Gradient Animation */
+
 @keyframes spaceGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.bounce {
+    animation: bounce 0.5s ease;
+}
+
+/* Glow effect */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+}
+
+.glow {
+    animation: glow 0.5s ease;
+}
+
+/* Rotation effect */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate {
+    animation: rotate 1s linear;
+}
+
+/* Glitter container */
+.glitter-container {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Glitter particle */
+.glitter {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #ffcc00, #ff9900);
+    border-radius: 50%;
+    animation: glitterAnimation 1s ease-out infinite;
+    opacity: 0.8;
+}
+
+/* Glitter animation */
+@keyframes glitterAnimation {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(100px, -100px) scale(0);
+    }
 }
