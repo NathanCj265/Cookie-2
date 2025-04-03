@@ -12,15 +12,38 @@
         <h1>🍪 Cookie Clicker 🍪</h1>
     </header>
     <main class="game-container">
-        <div class="game-stats">
-            <h2>Game Stats</h2>
-            <p>Points: <span id="pointsDisplay">0</span></p>
-            <p>Click Power: <span id="clickPower">1</span></p>
-            <p>Clicks: <span id="clicks">0</span></p>
-            <p>Clicks Per Second: <span id="clicksPerSecond">0</span></p>
+        <div class="stats-counters">
+            <div class="game-stats">
+                <h2>Game Stats</h2>
+                <p>Points: <span id="pointsDisplay">0</span></p>
+                <p>Click Power: <span id="clickPower">1</span></p>
+                <p>Clicks: <span id="clicks">0</span></p>
+                <p>Clicks Per Second: <span id="clicksPerSecond">0</span></p>
+            </div>
+
+            <div class="auto-clicker-counters">
+                <h3>Auto-Clicker Counters</h3>
+                <p>Cursor: <span id="autoclickers-0">12</span></p>
+                <p>Grandma: <span id="autoclickers-1">3</span></p>
+                <p>Bakery: <span id="autoclickers-2">4</span></p>
+                <p>Factory: <span id="autoclickers-3">3</span></p>
+                <p>Mine: <span id="autoclickers-4">1</span></p>
+                <p>Spaceship: <span id="autoclickers-5">1</span></p>
+                <p>Robot: <span id="autoclickers-6">0</span></p>
+                <p>Alien: <span id="autoclickers-7">0</span></p>
+            </div>
         </div>
 
         <div class="game-actions">
+            <div class="themes">
+                <h3>Buy Themes</h3>
+                <button id="buyDark">Dark Theme (1000 pts)</button>
+                <button id="buyCookie">Cookie Theme (3000 pts)</button>
+                <button id="buyCandy">Candy Theme (4000 pts)</button>
+                <button id="buyChocolate">Chocolate Theme (5000 pts)</button>
+                <button id="buySpace">Space Theme (6000 pts)</button>
+            </div>
+
             <div class="cookie-click">
                 <p>Click the cookie to earn points!</p>
                 <img id="cookie" src="images/main-cookie.png" alt="Cookie">
@@ -36,14 +59,6 @@
                 <button id="buySpaceship">Spaceship (5000 pts)</button> 
                 <button id="buyRobot">Robot (10000 pts)</button> 
                 <button id="buyAlien">Alien (20000 pts)</button>
-                <p id="autoclickers-0">Cursor: 0</p>
-                <p id="autoclickers-1">Grandma: 0</p>
-                <p id="autoclickers-2">Bakery: 0</p>
-                <p id="autoclickers-3">Factory: 0</p>
-                <p id="autoclickers-4">Mine: 0</p>
-                <p id="autoclickers-5">Spaceship: 0</p> 
-                <p id="autoclickers-6">Robot: 0</p> 
-                <p id="autoclickers-7">Alien: 0</p> 
             </div>
 
             <div class="upgrades">
@@ -54,21 +69,14 @@
                 <button id="buyCookieFactory">Cookie Factory (+50 Click Power) 5000 pts</button>
                 <button id="buyCookieEmpire">Cookie Empire (+100 Click Power) 10000 pts</button>
             </div>
-
-            <div class="themes">
-                <h3>Buy Themes</h3>
-                <button id="buyDark">Dark Theme (1000 pts)</button>
-                <button id="buyLight">Light Theme (2000 pts)</button>
-                <button id="buyCookie">Cookie Theme (3000 pts)</button>
-                <button id="buyCandy">Candy Theme (4000 pts)</button>
-            </div>
         </div>
 
         <button id="resetGame" class="reset-button">Reset Game</button>
         <button id="saveGame" class="save-button">Save Game</button>
+        <div id="statusMessage"></div>
     </main>
     <footer>
-        <p>&copy; Cookie clicker </p>
+        <p>&copy; Cookie Clicker</p>
     </footer>
     <script src="script.js"></script>
 </body>

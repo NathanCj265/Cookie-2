@@ -77,25 +77,94 @@ class ThemesButton extends Button {
     }
 
     buttonSpecificBehaviour() {
-        if (this.game.points >= this.cost) {
-            this.game.points -= this.cost;
+        const theme = this.game.themes[this.themeType];
+
+        if (theme.purchased) {
+            // If the theme is already purchased, just apply it
             this.applyTheme(this.themeType);
-            this.game.updateUI();
-            this.game.saveGame();
+        } else if (this.game.points >= this.cost) {
+            // If the theme is not purchased but the user has enough points, purchase it
+            this.game.points -= this.cost; // Deduct points
+            theme.purchased = true; // Mark the theme as purchased
+            this.applyTheme(this.themeType); // Apply the selected theme
+            this.game.updateUI(); // Update the UI
+            this.game.saveGame(); // Save the game state
         } else {
-            alert("Not enough points!");
+            // If the user doesn't have enough points, show an alert
+            alert("You don't have enough points to buy this theme!");
         }
     }
 
     applyTheme(themeType) {
         const theme = this.game.themes[themeType];
-        document.body.style.backgroundImage = theme.background;
-        document.body.className = theme.color;
+        if (theme) {
+            // Apply the theme's background color and class
+            document.body.style.background = theme.backgroundColor; // Use `background` for gradients
+            document.body.className = theme.color;
+
+            // Save the current theme to localStorage
+            localStorage.setItem("currentTheme", themeType);
+        } else {
+            console.error(`Theme '${themeType}' not found!`);
+        }
     }
 }
 
 class CookieClickerGame {
     constructor() {
+        this.points = 0;
+        this.clickPower = 1;
+        this.clicks = 0;
+        this.clicksPerSecond = 0;
+        this.autoClickers = {
+            cursor: 0,
+            grandma: 0,
+            bakery: 0,
+            factory: 0,
+            mine: 0,
+            spaceship: 0,
+            robot: 0,
+            alien: 0
+        };
+        this.upgrades = {
+            goldenFingers: { cost: 50, boost: 1 },
+            ironCookie: { cost: 250, boost: 5 },
+            cookieGod: { cost: 1000, boost: 10 },
+            cookieFactory: { cost: 5000, boost: 50 },
+            cookieEmpire: { cost: 10000, boost: 100 }
+        };
+        this.themes = {
+            dark: {
+                cost: 1000,
+                backgroundColor: "#333333",
+                color: "darkTheme",
+                purchased: false // Track if the theme is purchased
+            },
+            cookie: {
+                cost: 3000,
+                backgroundColor: "#f5deb3",
+                color: "cookieTheme",
+                purchased: false
+            },
+            candy: {
+                cost: 4000,
+                backgroundColor: "#ffcccb",
+                color: "candyTheme",
+                purchased: false
+            },
+            chocolate: {
+                cost: 5000,
+                backgroundColor: "#4b2e2e",
+                color: "chocolateTheme",
+                purchased: false
+            },
+            space: {
+                cost: 6000,
+                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)", // Gradient background
+                color: "spaceTheme",
+                purchased: false
+            }
+        };
         this.loadGame();
         this.startAutoClicker();
         this.startClicksPerSecondCounter();
@@ -111,6 +180,13 @@ class CookieClickerGame {
         localStorage.setItem("autoClickers", JSON.stringify(this.autoClickers));
         localStorage.setItem("upgrades", JSON.stringify(this.upgrades));
         localStorage.setItem("themes", JSON.stringify(this.themes));
+
+        const statusMessage = document.getElementById("statusMessage");
+        statusMessage.innerText = "Game saved!";
+
+        setTimeout(() => {
+            statusMessage.innerText = "";
+        }, 6000);
     }
 
     loadGame() {
@@ -138,25 +214,43 @@ class CookieClickerGame {
         this.themes = JSON.parse(localStorage.getItem("themes")) || {
             dark: {
                 cost: 1000,
-                background: "url('img/bg2.jpg')",
-                color: "darkTheme"
-            },
-            light: {
-                cost: 2000,
-                background: "url('img/bg3.jpg')",
-                color: "lightTheme"
+                backgroundColor: "#333333",
+                color: "darkTheme",
+                purchased: false
             },
             cookie: {
                 cost: 3000,
-                background: "url('img/bg4.jpg')",
-                color: "cookieTheme"
+                backgroundColor: "#f5deb3",
+                color: "cookieTheme",
+                purchased: false
             },
             candy: {
                 cost: 4000,
-                background: "url('img/bg5.jpg')",
-                color: "candyTheme"
+                backgroundColor: "#ffcccb",
+                color: "candyTheme",
+                purchased: false
+            },
+            chocolate: {
+                cost: 5000,
+                backgroundColor: "#4b2e2e",
+                color: "chocolateTheme",
+                purchased: false
+            },
+            space: {
+                cost: 6000,
+                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
+                color: "spaceTheme",
+                purchased: false
             }
         };
+
+        // Apply the saved theme
+        const savedTheme = localStorage.getItem("currentTheme");
+        if (savedTheme && this.themes[savedTheme]) {
+            const theme = this.themes[savedTheme];
+            document.body.style.background = theme.backgroundColor; // Use `background` for gradients
+            document.body.className = theme.color;
+        }
     }
 
     resetGame() {
@@ -183,27 +277,44 @@ class CookieClickerGame {
         this.themes = {
             dark: {
                 cost: 1000,
-                background: "url('img/bg2.jpg')",
-                color: "darkTheme"
-            },
-            light: {
-                cost: 2000,
-                background: "url('img/bg3.jpg')",
-                color: "lightTheme"
+                backgroundColor: "#333333",
+                color: "darkTheme",
+                purchased: false
             },
             cookie: {
                 cost: 3000,
-                background: "url('img/bg4.jpg')",
-                color: "cookieTheme"
+                backgroundColor: "#f5deb3",
+                color: "cookieTheme",
+                purchased: false
             },
             candy: {
                 cost: 4000,
-                background: "url('img/bg5.jpg')",
-                color: "candyTheme"
+                backgroundColor: "#ffcccb",
+                color: "candyTheme",
+                purchased: false
+            },
+            chocolate: {
+                cost: 5000,
+                backgroundColor: "#4b2e2e",
+                color: "chocolateTheme",
+                purchased: false
+            },
+            space: {
+                cost: 6000,
+                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
+                color: "spaceTheme",
+                purchased: false
             }
         };
+
+        document.body.style.background = "#ffffff"; // Reset to default white background
+        document.body.className = ""; // Remove any applied theme class
+
+        localStorage.removeItem("currentTheme");
+
         this.updateUI();
         this.saveGame();
+        alert("Game reset!");
     }
 
     clickCookie() {
@@ -264,10 +375,32 @@ class CookieClickerGame {
         document.getElementById("buyCookieFactory").innerText = `Cookie Factory (+50 Click Power) ${this.upgrades.cookieFactory.cost} pts`;
         document.getElementById("buyCookieEmpire").innerText = `Cookie Empire (+100 Click Power) ${this.upgrades.cookieEmpire.cost} pts`;
 
-        document.getElementById("buyDark").innerText = `Dark Theme (${this.themes.dark.cost} pts)`;
-        document.getElementById("buyLight").innerText = `Light Theme (${this.themes.light.cost} pts)`;
-        document.getElementById("buyCookie").innerText = `Cookie Theme (${this.themes.cookie.cost} pts)`;
-        document.getElementById("buyCandy").innerText = `Candy Theme (${this.themes.candy.cost} pts)`;
+        // Update theme buttons
+        if (this.themes.dark) {
+            document.getElementById("buyDark").innerText = this.themes.dark.purchased
+                ? "Purchased!"
+                : `Dark Theme (${this.themes.dark.cost} pts)`;
+        }
+        if (this.themes.cookie) {
+            document.getElementById("buyCookie").innerText = this.themes.cookie.purchased
+                ? "Purchased!"
+                : `Cookie Theme (${this.themes.cookie.cost} pts)`;
+        }
+        if (this.themes.candy) {
+            document.getElementById("buyCandy").innerText = this.themes.candy.purchased
+                ? "Purchased!"
+                : `Candy Theme (${this.themes.candy.cost} pts)`;
+        }
+        if (this.themes.chocolate) {
+            document.getElementById("buyChocolate").innerText = this.themes.chocolate.purchased
+                ? "Purchased!"
+                : `Chocolate Theme (${this.themes.chocolate.cost} pts)`;
+        }
+        if (this.themes.space) {
+            document.getElementById("buySpace").innerText = this.themes.space.purchased
+                ? "Purchased!"
+                : `Space Theme (${this.themes.space.cost} pts)`;
+        }
     }
 }
 
@@ -291,9 +424,10 @@ document.addEventListener("DOMContentLoaded", () => {
     new UpgradeButton("buyCookieEmpire", "cookieEmpire", 10000, game);
 
     new ThemesButton("buyDark", "dark", 1000, game);
-    new ThemesButton("buyLight", "light", 2000, game);
     new ThemesButton("buyCookie", "cookie", 3000, game);
     new ThemesButton("buyCandy", "candy", 4000, game);
+    new ThemesButton("buyChocolate", "chocolate", 5000, game);
+    new ThemesButton("buySpace", "space", 6000, game);
 
     document.getElementById("resetGame").addEventListener("click", () => game.resetGame());
     document.getElementById("saveGame").addEventListener("click", () => game.saveGame());

@@ -4,77 +4,106 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: 'Roboto', sans-serif;
-    background: #f8f4e3;
     color: #333;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
-    padding: 20px;
+    transition: background 0.5s ease;
 }
+
 
 header, footer {
     width: 100%;
-    background: #ff6347;
+    background: linear-gradient(135deg, #ff6347, #ff4500);
     color: #fff;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1, footer p {
     margin: 0;
+    font-size: 32px;
+    font-weight: bold;
 }
 
+
 .game-container {
-    background: #ffffff;
-    border-radius: 10px;
     padding: 40px;
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s ease;
 }
 
-h1 {
-    font-size: 48px;
+
+.stats-counters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     margin-bottom: 30px;
-    color: black;
+    gap: 20px;
 }
+
 
 .game-stats {
-    margin-bottom: 40px;
+    text-align: left;
+    color: red;
 }
 
 .game-stats h2 {
-    font-size: 32px;
-    color: #333;
+    font-size: 28px;
+    color: #ff0000;
+    margin-bottom: 10px;
 }
 
 .game-stats p {
-    font-size: 24px;
+    font-size: 20px;
     margin: 10px 0;
 }
 
-/* Cookie section */
+
+.auto-clicker-counters {
+    text-align: left;
+    color: red;
+}
+
+.auto-clicker-counters h3 {
+    font-size: 22px;
+    color: #ff0000;
+    margin-bottom: 10px;
+}
+
+.auto-clicker-counters p {
+    font-size: 16px; 
+    margin: 5px 0;
+}
+
+
 .game-actions {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 40px;
     width: 100%;
+    gap: 20px;
 }
 
+
 .cookie-click {
-    flex: 1;
-    min-width: 300px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #cookie {
@@ -98,46 +127,75 @@ h1 {
 
 .auto-clickers, .upgrades, .themes {
     flex: 1;
-    min-width: 300px;
+    min-width: 200px;
     text-align: left;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button {
-    background: #ffcc00;
+.auto-clickers h3, .upgrades h3, .themes h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ff6347;
+}
+
+.auto-clickers button, .upgrades button, .themes button {
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
     color: #333;
-    padding: 20px;
-    font-size: 18px;
-    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
     margin: 10px 0;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.1s ease;
     width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-    background: #ffaa00;
+.auto-clickers button:hover, .upgrades button:hover, .themes button:hover {
+    background: linear-gradient(135deg, #ffaa00, #ff7700);
     transform: scale(1.05);
 }
 
-button:disabled {
+.auto-clickers button:disabled, .upgrades button:disabled, .themes button:disabled {
     background: #dcdcdc;
     cursor: not-allowed;
 }
 
+
 .reset-button, .save-button {
     background: #ff6347;
     color: #fff;
-    margin-top: 30px;
+    position: absolute;
+    top: 10px;
+    width: auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reset-button {
+    left: 10px;
+}
+
+.save-button {
+    right: 10px;
 }
 
 .reset-button:hover, .save-button:hover {
     background: #e5533d;
 }
 
+
 h3 {
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ff6347;
 }
+
 
 @media (max-width: 768px) {
     .game-actions {
@@ -150,7 +208,48 @@ h3 {
     }
 
     button {
-        padding: 15px;
-        font-size: 16px;
+        padding: 10px;
+        font-size: 14px;
     }
+}
+
+/* Dark Theme */
+body.darkTheme {
+    background-color: #333333; /* Dark gray background */
+    color: white; /* White text color */
+}
+
+
+
+/* Cookie Theme */
+body.cookieTheme {
+    background-color: #f5deb3; /* Cookie-like beige background */
+    color: #333; /* Dark gray text color */
+}
+
+/* Candy Theme */
+body.candyTheme {
+    background-color: #ffcccb; /* Light pink candy background */
+    color: #333; /* Dark gray text color */
+}
+
+/* Chocolate Theme */
+body.chocolateTheme {
+    background-color: #4b2e2e; /* Dark chocolate background */
+    color: #f5deb3; /* Light beige text color */
+}
+
+/* Space Theme */
+body.spaceTheme {
+    background: linear-gradient(135deg, #000033, #1a1a66, #333399); 
+    color: #ffffff; 
+    background-size: 400% 400%;
+    animation: spaceGradient 10s ease infinite; 
+}
+
+/* Space Theme Gradient Animation */
+@keyframes spaceGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
