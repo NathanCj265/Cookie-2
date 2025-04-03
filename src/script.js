@@ -104,7 +104,6 @@ class ThemesButton extends Button {
         }
     }
 }
-
 class CookieClickerGame {
     constructor() {
         this.points = 0;
@@ -133,7 +132,7 @@ class CookieClickerGame {
                 cost: 1000,
                 backgroundColor: "#333333",
                 color: "darkTheme",
-                purchased: false 
+                purchased: false
             },
             cookie: {
                 cost: 3000,
@@ -155,7 +154,7 @@ class CookieClickerGame {
             },
             space: {
                 cost: 6000,
-                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)", 
+                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
                 color: "spaceTheme",
                 purchased: false
             }
@@ -176,12 +175,8 @@ class CookieClickerGame {
         localStorage.setItem("upgrades", JSON.stringify(this.upgrades));
         localStorage.setItem("themes", JSON.stringify(this.themes));
 
-        const statusMessage = document.getElementById("statusMessage");
-        statusMessage.innerText = "Game saved!";
-
-        setTimeout(() => {
-            statusMessage.innerText = "";
-        }, 6000);
+        // Display a popup message
+        alert("Game saved!");
     }
 
     loadGame() {
@@ -243,7 +238,7 @@ class CookieClickerGame {
         const savedTheme = localStorage.getItem("currentTheme");
         if (savedTheme && this.themes[savedTheme]) {
             const theme = this.themes[savedTheme];
-            document.body.style.background = theme.backgroundColor; 
+            document.body.style.background = theme.backgroundColor;
             document.body.className = theme.color;
         }
     }
@@ -302,7 +297,7 @@ class CookieClickerGame {
             }
         };
 
-        document.body.style.background = "#ffffff"; 
+        document.body.style.background = "#ffffff";
         document.body.className = "";
 
         localStorage.removeItem("currentTheme");
@@ -316,7 +311,6 @@ class CookieClickerGame {
         this.points += this.clickPower;
         this.clicks += 1;
         this.updateUI();
-        this.saveGame();
     }
 
     startAutoClicker() {
@@ -325,7 +319,6 @@ class CookieClickerGame {
                 this.points += this.autoClickers[type];
             }
             this.updateUI();
-            this.saveGame();
         }, 1000);
     }
 
@@ -344,7 +337,6 @@ class CookieClickerGame {
                 this.points += 1000; // Reward for the special event
                 alert("Special Event! You earned 1000 points!");
                 this.updateUI();
-                this.saveGame();
             }
         }, 60000); // Check for special events every 60 seconds
     }
@@ -370,7 +362,6 @@ class CookieClickerGame {
         document.getElementById("buyCookieFactory").innerText = `Cookie Factory (+50 Click Power) ${this.upgrades.cookieFactory.cost} pts`;
         document.getElementById("buyCookieEmpire").innerText = `Cookie Empire (+100 Click Power) ${this.upgrades.cookieEmpire.cost} pts`;
 
-        
         if (this.themes.dark) {
             document.getElementById("buyDark").innerText = this.themes.dark.purchased
                 ? "Purchased!"
