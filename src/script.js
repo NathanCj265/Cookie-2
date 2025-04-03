@@ -80,17 +80,15 @@ class ThemesButton extends Button {
         const theme = this.game.themes[this.themeType];
 
         if (theme.purchased) {
-            // If the theme is already purchased, just apply it
             this.applyTheme(this.themeType);
         } else if (this.game.points >= this.cost) {
-            // If the theme is not purchased but the user has enough points, purchase it
-            this.game.points -= this.cost; // Deduct points
-            theme.purchased = true; // Mark the theme as purchased
-            this.applyTheme(this.themeType); // Apply the selected theme
-            this.game.updateUI(); // Update the UI
-            this.game.saveGame(); // Save the game state
+            this.game.points -= this.cost; 
+            theme.purchased = true; 
+            this.applyTheme(this.themeType); 
+            this.game.updateUI();
+            this.game.saveGame(); 
         } else {
-            // If the user doesn't have enough points, show an alert
+            
             alert("You don't have enough points to buy this theme!");
         }
     }
@@ -98,11 +96,8 @@ class ThemesButton extends Button {
     applyTheme(themeType) {
         const theme = this.game.themes[themeType];
         if (theme) {
-            // Apply the theme's background color and class
-            document.body.style.background = theme.backgroundColor; // Use `background` for gradients
+            document.body.style.background = theme.backgroundColor; 
             document.body.className = theme.color;
-
-            // Save the current theme to localStorage
             localStorage.setItem("currentTheme", themeType);
         } else {
             console.error(`Theme '${themeType}' not found!`);
@@ -138,7 +133,7 @@ class CookieClickerGame {
                 cost: 1000,
                 backgroundColor: "#333333",
                 color: "darkTheme",
-                purchased: false // Track if the theme is purchased
+                purchased: false 
             },
             cookie: {
                 cost: 3000,
@@ -160,7 +155,7 @@ class CookieClickerGame {
             },
             space: {
                 cost: 6000,
-                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)", // Gradient background
+                backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)", 
                 color: "spaceTheme",
                 purchased: false
             }
@@ -248,7 +243,7 @@ class CookieClickerGame {
         const savedTheme = localStorage.getItem("currentTheme");
         if (savedTheme && this.themes[savedTheme]) {
             const theme = this.themes[savedTheme];
-            document.body.style.background = theme.backgroundColor; // Use `background` for gradients
+            document.body.style.background = theme.backgroundColor; 
             document.body.className = theme.color;
         }
     }
@@ -307,8 +302,8 @@ class CookieClickerGame {
             }
         };
 
-        document.body.style.background = "#ffffff"; // Reset to default white background
-        document.body.className = ""; // Remove any applied theme class
+        document.body.style.background = "#ffffff"; 
+        document.body.className = "";
 
         localStorage.removeItem("currentTheme");
 
@@ -375,7 +370,7 @@ class CookieClickerGame {
         document.getElementById("buyCookieFactory").innerText = `Cookie Factory (+50 Click Power) ${this.upgrades.cookieFactory.cost} pts`;
         document.getElementById("buyCookieEmpire").innerText = `Cookie Empire (+100 Click Power) ${this.upgrades.cookieEmpire.cost} pts`;
 
-        // Update theme buttons
+        
         if (this.themes.dark) {
             document.getElementById("buyDark").innerText = this.themes.dark.purchased
                 ? "Purchased!"
