@@ -1,5 +1,9 @@
 class Button {
     constructor(buttonHTMLID) {
+        if (new.target === Button) {
+            throw new Error("Cannot instantiate abstract class 'Button' directly.");
+        }
+
         const buttonElement = document.getElementById(buttonHTMLID);
         if (buttonElement) {
             buttonElement.addEventListener("click", () => this.handleClick());
@@ -36,10 +40,20 @@ class AutoClickerButton extends Button {
         this.game = game;
     }
 
+    updateButtonText() {
+        const clicker = this.game.autoClickerManager.clickers[this.autoClickerType];
+        const buttonElement = document.getElementById(`buy${this.autoClickerType}`);
+        if (buttonElement && clicker) {
+            buttonElement.innerText = `${clicker.name} (Cost: ${clicker.getPrice()} pts)`;
+        }
+    }
+
     buttonSpecificBehaviour() {
-        if (this.game.points >= this.cost) {
-            this.game.points -= this.cost;
-            this.game.autoClickers[this.autoClickerType]++;
+        const clicker = this.game.autoClickerManager.clickers[this.autoClickerType];
+        if (clicker && this.game.points >= clicker.getPrice()) {
+            this.game.points -= clicker.getPrice();
+            clicker.buy();
+            this.updateButtonText(); 
             this.game.updateUI();
         } else {
             alert("Not enough points!");
@@ -100,22 +114,76 @@ class ThemesButton extends Button {
     }
 }
 
+class AutoClicker {
+    constructor(name, basePrice, cps) {
+        this.name = name;
+        this.count = 0;
+        this.basePrice = basePrice;
+        this.cps = cps;
+    }
+
+    getPrice() {
+        return Math.floor(this.basePrice * Math.pow(1.15, this.count));
+    }
+
+    buy() {
+        this.count++;
+    }
+
+    getProduction() {
+        return this.count * this.cps; 
+    }
+}
+
+class AutoClickerManager {
+    constructor() {
+        this.clickers = {
+            cursor: new AutoClicker('Cursor', 15, 1),       // Cursor CPS = 1
+            grandma: new AutoClicker('Grandma', 100, 2),    // Grandma CPS = 2
+            bakery: new AutoClicker('Bakery', 500, 3),      // Bakery CPS = 3
+            factory: new AutoClicker('Factory', 2000, 4),   // Factory CPS = 4
+            mine: new AutoClicker('Mine', 10000, 5),        // Mine CPS = 5
+            spaceship: new AutoClicker('Spaceship', 50000, 6), // Spaceship CPS = 6
+            robot: new AutoClicker('Robot', 100000, 7),     // Robot CPS = 7
+            alien: new AutoClicker('Alien', 1000000, 8)     // Alien CPS = 8
+        };
+    }
+
+    totalCPS() {
+        return Object.values(this.clickers)
+            .reduce((sum, clicker) => sum + clicker.getProduction(), 0);
+    }
+
+    buyClicker(name, game) {
+        const clicker = this.clickers[name];
+        if (clicker && game.points >= clicker.getPrice()) {
+            game.points -= clicker.getPrice();
+            clicker.buy();
+            game.updateUI();
+        } else {
+            alert(`Not enough points to buy ${name}!`);
+        }
+    }
+
+    getClickerInfo(name) {
+        const clicker = this.clickers[name];
+        if (clicker) {
+            return {
+                count: clicker.count,
+                price: clicker.getPrice(),
+                production: clicker.getProduction()
+            };
+        }
+        return null;
+    }
+}
 class CookieClickerGame {
     constructor() {
         this.points = 0;
         this.clickPower = 1;
         this.clicks = 0;
         this.clicksPerSecond = 0;
-        this.autoClickers = {
-            cursor: 0,
-            grandma: 0,
-            bakery: 0,
-            factory: 0,
-            mine: 0,
-            spaceship: 0,
-            robot: 0,
-            alien: 0
-        };
+        this.autoClickerManager = new AutoClickerManager();
         this.upgrades = {
             goldenFingers: { cost: 50, boost: 1 },
             ironCookie: { cost: 250, boost: 5 },
@@ -167,7 +235,7 @@ class CookieClickerGame {
         localStorage.setItem("clickPower", this.clickPower);
         localStorage.setItem("clicks", this.clicks);
         localStorage.setItem("clicksPerSecond", this.clicksPerSecond);
-        localStorage.setItem("autoClickers", JSON.stringify(this.autoClickers));
+        localStorage.setItem("autoClickers", JSON.stringify(this.autoClickerManager.clickers));
         localStorage.setItem("upgrades", JSON.stringify(this.upgrades));
         localStorage.setItem("themes", JSON.stringify(this.themes));
 
@@ -180,16 +248,16 @@ class CookieClickerGame {
         this.clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
         this.clicks = parseInt(localStorage.getItem("clicks")) || 0;
         this.clicksPerSecond = parseInt(localStorage.getItem("clicksPerSecond")) || 0;
-        this.autoClickers = JSON.parse(localStorage.getItem("autoClickers")) || {
-            cursor: 0,
-            grandma: 0,
-            bakery: 0,
-            factory: 0,
-            mine: 0,
-            spaceship: 0,
-            robot: 0,
-            alien: 0
-        };
+        const savedAutoClickers = JSON.parse(localStorage.getItem("autoClickers")) || {};
+        Object.keys(this.autoClickerManager.clickers).forEach(name => {
+            if (savedAutoClickers[name]) {
+                const savedClicker = savedAutoClickers[name];
+                const clicker = this.autoClickerManager.clickers[name];
+                clicker.count = savedClicker.count || 0;
+                clicker.basePrice = savedClicker.basePrice || clicker.basePrice;
+                clicker.cps = savedClicker.cps || clicker.cps;
+            }
+        });
         this.upgrades = JSON.parse(localStorage.getItem("upgrades")) || {
             goldenFingers: { cost: 50, boost: 1 },
             ironCookie: { cost: 250, boost: 5 },
@@ -243,16 +311,7 @@ class CookieClickerGame {
         this.points = 0;
         this.clickPower = 1;
         this.clicks = 0;
-        this.autoClickers = {
-            cursor: 0,
-            grandma: 0,
-            bakery: 0,
-            factory: 0,
-            mine: 0,
-            spaceship: 0,
-            robot: 0,
-            alien: 0
-        };
+        this.autoClickerManager = new AutoClickerManager();
         this.upgrades = {
             goldenFingers: { cost: 50, boost: 1 },
             ironCookie: { cost: 250, boost: 5 },
@@ -311,9 +370,7 @@ class CookieClickerGame {
 
     startAutoClicker() {
         setInterval(() => {
-            for (let type in this.autoClickers) {
-                this.points += this.autoClickers[type];
-            }
+            this.points += Math.floor(this.autoClickerManager.totalCPS()); 
             this.updateUI();
         }, 1000);
     }
@@ -338,19 +395,18 @@ class CookieClickerGame {
     }
 
     updateUI() {
-        document.getElementById("pointsDisplay").innerText = this.points;
-        document.getElementById("clickPower").innerText = this.clickPower;
-        document.getElementById("clicks").innerText = this.clicks;
-        document.getElementById("clicksPerSecond").innerText = this.clicksPerSecond;
-
-        document.getElementById("autoclickers-0").innerText = `Cursor: ${this.autoClickers.cursor}`;
-        document.getElementById("autoclickers-1").innerText = `Grandma: ${this.autoClickers.grandma}`;
-        document.getElementById("autoclickers-2").innerText = `Bakery: ${this.autoClickers.bakery}`;
-        document.getElementById("autoclickers-3").innerText = `Factory: ${this.autoClickers.factory}`;
-        document.getElementById("autoclickers-4").innerText = `Mine: ${this.autoClickers.mine}`;
-        document.getElementById("autoclickers-5").innerText = `Spaceship: ${this.autoClickers.spaceship}`;
-        document.getElementById("autoclickers-6").innerText = `Robot: ${this.autoClickers.robot}`;
-        document.getElementById("autoclickers-7").innerText = `Alien: ${this.autoClickers.alien}`;
+        document.getElementById("pointsDisplay").innerText = Math.floor(this.points); // Ensure integer display
+        document.getElementById("clickPower").innerText = Math.floor(this.clickPower);
+        document.getElementById("clicks").innerText = Math.floor(this.clicks);
+        document.getElementById("clicksPerSecond").innerText = Math.floor(this.clicksPerSecond);
+    
+        Object.keys(this.autoClickerManager.clickers).forEach((name, index) => {
+            const clickerInfo = this.autoClickerManager.getClickerInfo(name);
+            const element = document.getElementById(`autoclickers-${index}`);
+            if (element) {
+                element.innerText = `${name}: ${clickerInfo.count} (Cost: ${clickerInfo.price} pts, CPS: ${clickerInfo.production})`;
+            }
+        });
 
         document.getElementById("buyGoldenFingers").innerText = `Golden Fingers (+1 Click Power) ${this.upgrades.goldenFingers.cost} pts`;
         document.getElementById("buyIronCookie").innerText = `Iron Cookie (+5 Click Power) ${this.upgrades.ironCookie.cost} pts`;
@@ -390,14 +446,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const game = new CookieClickerGame();
 
     new Incr1Button("cookie", game);
-    new AutoClickerButton("buyCursor", "cursor", 10, game);
-    new AutoClickerButton("buyGrandma", "grandma", 20, game);
-    new AutoClickerButton("buyBakery", "bakery", 100, game);
-    new AutoClickerButton("buyFactory", "factory", 500, game);
-    new AutoClickerButton("buyMine", "mine", 2000, game);
-    new AutoClickerButton("buySpaceship", "spaceship", 5000, game);
-    new AutoClickerButton("buyRobot", "robot", 10000, game);
-    new AutoClickerButton("buyAlien", "alien", 20000, game);
+
+    Object.keys(game.autoClickerManager.clickers).forEach((name, index) => {
+        const clicker = game.autoClickerManager.clickers[name];
+        new AutoClickerButton(`buy${name}`, name, clicker.getPrice(), game);
+    });
 
     new UpgradeButton("buyGoldenFingers", "goldenFingers", 50, game);
     new UpgradeButton("buyIronCookie", "ironCookie", 250, game);
