@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (cookie) {
         cookie.addEventListener("click", () => {
-            // Add the bounce and glow animation classes
+            
             cookie.classList.add("bounce", "glow");
 
-            // Remove the animation classes after they finish
+           
             setTimeout(() => {
                 cookie.classList.remove("bounce", "glow");
-            }, 500); // Match this duration with the CSS animation duration
+            }, 500); 
 
-            // Create glitter effect
+            
             createGlitterEffect(cookie);
         });
     } else {
@@ -24,14 +24,14 @@ function createGlitterEffect(cookie) {
     glitterContainer.classList.add("glitter-container");
     document.body.appendChild(glitterContainer);
 
-    const glitterCount = 20; // Number of glitter particles
+    const glitterCount = 20;
     const cookieRect = cookie.getBoundingClientRect();
 
     for (let i = 0; i < glitterCount; i++) {
         const glitter = document.createElement("div");
         glitter.classList.add("glitter");
 
-        // Randomize glitter position and animation
+        
         glitter.style.left = `${cookieRect.left + cookieRect.width / 2}px`;
         glitter.style.top = `${cookieRect.top + cookieRect.height / 2}px`;
         glitter.style.transform = `translate(${Math.random() * 200 - 100}px, ${

@@ -40,7 +40,7 @@ class AutoClickerButton extends Button {
         if (this.game.points >= this.cost) {
             this.game.points -= this.cost;
             this.game.autoClickers[this.autoClickerType]++;
-            this.game.updateUI(); // Update the UI only
+            this.game.updateUI();
         } else {
             alert("Not enough points!");
         }
@@ -59,7 +59,7 @@ class UpgradeButton extends Button {
         if (this.game.points >= this.cost) {
             this.game.points -= this.cost;
             this.game.clickPower += this.game.upgrades[this.upgradeType].boost;
-            this.game.updateUI(); // Update the UI only
+            this.game.updateUI(); 
         } else {
             alert("Not enough points!");
         }
@@ -76,14 +76,13 @@ class ThemesButton extends Button {
 
     buttonSpecificBehaviour() {
         const theme = this.game.themes[this.themeType];
-
         if (theme.purchased) {
             this.applyTheme(this.themeType);
         } else if (this.game.points >= this.cost) {
             this.game.points -= this.cost;
             theme.purchased = true;
             this.applyTheme(this.themeType);
-            this.game.updateUI(); // Update the UI only
+            this.game.updateUI(); 
         } else {
             alert("You don't have enough points to buy this theme!");
         }
