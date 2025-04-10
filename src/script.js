@@ -185,39 +185,39 @@ class CookieClickerGame {
         this.clicksPerSecond = 0;
         this.autoClickerManager = new AutoClickerManager();
         this.upgrades = {
-            goldenFingers: { cost: 50, boost: 1 },
-            ironCookie: { cost: 250, boost: 5 },
-            cookieGod: { cost: 1000, boost: 10 },
-            cookieFactory: { cost: 5000, boost: 50 },
-            cookieEmpire: { cost: 10000, boost: 100 }
+            goldenFingers: { cost: 5000, boost: 1 },
+            ironCookie: { cost: 10000, boost: 5 },
+            cookieGod: { cost: 15000, boost: 10 },
+            cookieFactory: { cost: 20000, boost: 50 },
+            cookieEmpire: { cost: 100000, boost: 100 }
         };
         this.themes = {
             dark: {
-                cost: 1000,
+                cost: 10000,
                 backgroundColor: "#333333",
                 color: "darkTheme",
                 purchased: false
             },
             cookie: {
-                cost: 3000,
+                cost:  30000,
                 backgroundColor: "#f5deb3",
                 color: "cookieTheme",
                 purchased: false
             },
             candy: {
-                cost: 4000,
+                cost:  50000,
                 backgroundColor: "#ffcccb",
                 color: "candyTheme",
                 purchased: false
             },
             chocolate: {
-                cost: 5000,
+                cost: 60000,
                 backgroundColor: "#4b2e2e",
                 color: "chocolateTheme",
                 purchased: false
             },
             space: {
-                cost: 6000,
+                cost: 60000,
                 backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
                 color: "spaceTheme",
                 purchased: false
@@ -259,39 +259,39 @@ class CookieClickerGame {
             }
         });
         this.upgrades = JSON.parse(localStorage.getItem("upgrades")) || {
-            goldenFingers: { cost: 50, boost: 1 },
-            ironCookie: { cost: 250, boost: 5 },
-            cookieGod: { cost: 1000, boost: 10 },
-            cookieFactory: { cost: 5000, boost: 50 },
-            cookieEmpire: { cost: 10000, boost: 100 }
+            goldenFingers: { cost: 5000, boost: 1 },
+            ironCookie: { cost: 10000, boost: 5 },
+            cookieGod: { cost: 15000, boost: 10 },
+            cookieFactory: { cost: 20000, boost: 50 },
+            cookieEmpire: { cost: 100000, boost: 100 }
         };
         this.themes = JSON.parse(localStorage.getItem("themes")) || {
             dark: {
-                cost: 1000,
+                cost: 10000,
                 backgroundColor: "#333333",
                 color: "darkTheme",
                 purchased: false
             },
             cookie: {
-                cost: 3000,
+                cost: 30000,
                 backgroundColor: "#f5deb3",
                 color: "cookieTheme",
                 purchased: false
             },
             candy: {
-                cost: 4000,
+                cost: 50000,
                 backgroundColor: "#ffcccb",
                 color: "candyTheme",
                 purchased: false
             },
             chocolate: {
-                cost: 5000,
+                cost: 60000,
                 backgroundColor: "#4b2e2e",
                 color: "chocolateTheme",
                 purchased: false
             },
             space: {
-                cost: 6000,
+                cost: 100000,
                 backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
                 color: "spaceTheme",
                 purchased: false
@@ -313,39 +313,39 @@ class CookieClickerGame {
         this.clicks = 0;
         this.autoClickerManager = new AutoClickerManager();
         this.upgrades = {
-            goldenFingers: { cost: 50, boost: 1 },
-            ironCookie: { cost: 250, boost: 5 },
-            cookieGod: { cost: 1000, boost: 10 },
-            cookieFactory: { cost: 5000, boost: 50 },
-            cookieEmpire: { cost: 10000, boost: 100 }
+            goldenFingers: { cost: 5000, boost: 1 },
+            ironCookie: { cost: 10000, boost: 5 },
+            cookieGod: { cost: 15000, boost: 10 },
+            cookieFactory: { cost: 20000, boost: 50 },
+            cookieEmpire: { cost: 100000, boost: 100 }
         };
         this.themes = {
             dark: {
-                cost: 1000,
+                cost: 10000,
                 backgroundColor: "#333333",
                 color: "darkTheme",
                 purchased: false
             },
             cookie: {
-                cost: 3000,
+                cost: 30000,
                 backgroundColor: "#f5deb3",
                 color: "cookieTheme",
                 purchased: false
             },
             candy: {
-                cost: 4000,
+                cost: 50000,
                 backgroundColor: "#ffcccb",
                 color: "candyTheme",
                 purchased: false
             },
             chocolate: {
-                cost: 5000,
+                cost: 60000,
                 backgroundColor: "#4b2e2e",
                 color: "chocolateTheme",
                 purchased: false
             },
             space: {
-                cost: 6000,
+                cost: 100000,
                 backgroundColor: "linear-gradient(135deg, #000033, #1a1a66, #333399)",
                 color: "spaceTheme",
                 purchased: false
@@ -452,17 +452,17 @@ document.addEventListener("DOMContentLoaded", () => {
         new AutoClickerButton(`buy${name}`, name, clicker.getPrice(), game);
     });
 
-    new UpgradeButton("buyGoldenFingers", "goldenFingers", 50, game);
-    new UpgradeButton("buyIronCookie", "ironCookie", 250, game);
-    new UpgradeButton("buyCookieGod", "cookieGod", 1000, game);
-    new UpgradeButton("buyCookieFactory", "cookieFactory", 5000, game);
-    new UpgradeButton("buyCookieEmpire", "cookieEmpire", 10000, game);
+    new UpgradeButton("buyGoldenFingers", "goldenFingers", 5000, game);
+    new UpgradeButton("buyIronCookie", "ironCookie", 10000, game);
+    new UpgradeButton("buyCookieGod", "cookieGod", 15000, game);
+    new UpgradeButton("buyCookieFactory", "cookieFactory", 20000, game);
+    new UpgradeButton("buyCookieEmpire", "cookieEmpire", 100000, game);
 
-    new ThemesButton("buyDark", "dark", 1000, game);
-    new ThemesButton("buyCookie", "cookie", 3000, game);
-    new ThemesButton("buyCandy", "candy", 4000, game);
-    new ThemesButton("buyChocolate", "chocolate", 5000, game);
-    new ThemesButton("buySpace", "space", 6000, game);
+    new ThemesButton("buyDark", "dark", 10000, game);
+    new ThemesButton("buyCookie", "cookie", 30000, game);
+    new ThemesButton("buyCandy", "candy", 50000, game);
+    new ThemesButton("buyChocolate", "chocolate", 60000, game);
+    new ThemesButton("buySpace", "space", 100000, game);
 
     document.getElementById("resetGame").addEventListener("click", () => game.resetGame());
     document.getElementById("saveGame").addEventListener("click", () => game.saveGame());
