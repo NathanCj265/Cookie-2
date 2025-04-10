@@ -251,77 +251,24 @@ body.spaceTheme {
     100% { background-position: 0% 50%; }
 }
 
-/* Bounce animation */
-@keyframes bounce {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-.bounce {
-    animation: bounce 0.5s ease;
-}
-
-/* Glow effect */
-@keyframes glow {
-    0% {
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(255, 255, 0, 1);
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-    }
-}
-
-.glow {
-    animation: glow 0.5s ease;
-}
-
-/* Rotation effect */
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.rotate {
-    animation: rotate 1s linear;
-}
-
-/* Glitter container */
 .glitter-container {
     position: absolute;
     pointer-events: none;
     z-index: 1000;
 }
 
-/* Glitter particle */
 .glitter {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: radial-gradient(circle, #ffcc00, #ff9900);
+    background: radial-gradient(circle, #ffd700, #ffa500);
     border-radius: 50%;
-    animation: glitterAnimation 1s ease-out infinite;
-    opacity: 0.8;
+    opacity: 1;
 }
 
-/* Glitter animation */
-@keyframes glitterAnimation {
-    0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-    }
-    100% {
+@keyframes glitter-fade {
+    to {
         opacity: 0;
-        transform: translate(100px, -100px) scale(0);
+        transform: translate(0, 0) scale(0);
     }
 }
